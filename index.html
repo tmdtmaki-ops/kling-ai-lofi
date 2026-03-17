@@ -1,191 +1,265 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KLING AI - Future of Intelligence</title>
-    <!-- Google Fonts: Montserrat for headings, Lato for body text -->
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <title>KLING AI - Deep Focus Lofi 2026</title>
+    <!-- Google Fonts: Inter for modern, highly readable UI -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --dark-bg: #0a0a1a; /* Very dark blue-black for a deep, futuristic feel */
+            --glass-bg: rgba(255, 255, 255, 0.05); /* Subtle white for glass effect */
+            --glass-border: rgba(255, 255, 255, 0.1); /* Light border for definition */
+            --text-light: #e0e0e0; /* Off-white for readability */
+            --text-accent: #8e44ad; /* A rich purple for AI/tech accent */
+            --cta-bg: #8e44ad; /* Primary CTA button color */
+            --cta-bg-hover: #9b59b6; /* Slightly lighter purple for hover */
+            --font-inter: 'Inter', sans-serif;
+            --border-radius-lg: 18px; /* Large radius for main card */
+            --border-radius-md: 10px; /* Medium radius for buttons */
+            --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Strong shadow for depth with glass */
+        }
+
+        /* Base Styles - Dark Mode */
+        body {
+            font-family: var(--font-inter);
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll from background elements */
+            position: relative; /* For background animated circles */
+        }
+
+        /* Animated Background Gradients - Adds depth and modern flair */
+        body::before, body::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%; /* Make them circles */
+            background: linear-gradient(45deg, rgba(142, 68, 173, 0.3), rgba(52, 152, 219, 0.3)); /* Purple to blue gradient */
+            filter: blur(80px); /* Soft, glowing effect */
+            z-index: -1; /* Keep them behind the content */
+            animation: moveCircles 18s infinite alternate ease-in-out; /* Slow, smooth animation */
+        }
+
+        body::before {
+            width: 350px;
+            height: 350px;
+            top: -120px;
+            left: -120px;
+            animation-delay: 0s;
+        }
+
+        body::after {
+            width: 450px;
+            height: 450px;
+            bottom: -180px;
+            right: -180px;
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.3), rgba(241, 196, 15, 0.3)); /* Red to yellow gradient */
+            animation-delay: 9s; /* Stagger the animation */
+        }
+
+        @keyframes moveCircles {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+            50% { transform: translate(70px, -70px) scale(1.1); opacity: 0.9; }
+            100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+        }
+
+        /* Main Content Container - Glassmorphism Effect */
+        .container {
+            max-width: 900px;
+            padding: 40px;
+            text-align: center;
+            /* Glassmorphism styles */
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px); /* The core glass effect */
+            -webkit-backdrop-filter: blur(10px); /* Safari support */
+            border: 1px solid var(--glass-border); /* Subtle border for definition */
+            box-shadow: var(--shadow-glass); /* Adds depth and dimension */
+            border-radius: var(--border-radius-lg);
+            margin: 20px; /* Spacing from viewport edges */
+            position: relative; /* Ensure it stays above background circles */
+            z-index: 10;
+        }
+
+        /* Header (Logo) */
+        header {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--glass-border); /* Separator with glass effect */
+        }
+
+        .logo {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 1px;
+            /* Gradient for a techy, premium feel */
+            background: linear-gradient(45deg, #e0e0e0, var(--text-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 8px rgba(142, 68, 173, 0.3); /* Subtle glow */
+        }
+
+        /* Hero Section - Content Focus */
+        .hero-section h1 {
+            font-size: 3.8em; /* Large, impactful title */
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.1;
+            color: var(--text-accent); /* Main title in accent color */
+            text-shadow: 0 0 15px rgba(142, 68, 173, 0.6); /* Prominent glow */
+        }
+
+        .hero-section h2 {
+            font-size: 1.9em;
+            font-weight: 400;
+            margin-bottom: 25px;
+            color: var(--text-light);
+            opacity: 0.85; /* Slightly less prominent than main title */
+        }
+
+        .hero-section p {
+            font-size: 1.2em;
+            max-width: 700px; /* Constrain line length for readability */
+            margin: 0 auto 40px auto;
+            color: var(--text-light);
+            opacity: 0.9;
+        }
+
+        /* Call to Action Button */
+        .cta-button {
+            display: inline-block;
+            background-color: var(--cta-bg);
+            color: #ffffff;
+            font-size: 1.4em; /* Prominent text size */
+            font-weight: 600;
+            padding: 20px 45px;
+            border-radius: var(--border-radius-md);
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Smooth transitions */
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4); /* Initial shadow */
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.8px;
+            text-transform: uppercase; /* Stronger call to action */
+        }
+
+        .cta-button:hover {
+            background-color: var(--cta-bg-hover);
+            transform: translateY(-5px) scale(1.03); /* Lift and slightly enlarge */
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5); /* More pronounced shadow on hover */
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 50px;
+            padding-top: 25px;
+            border-top: 1px solid var(--glass-border);
+            font-size: 0.9em;
+            color: var(--text-light);
+            opacity: 0.6;
+            text-align: center;
+            width: 100%;
+            z-index: 10; /* Ensure footer is above background elements */
+        }
+
+        /* Responsive Adjustments for Mobile and Tablet */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+                margin: 15px;
+            }
+
+            .logo {
+                font-size: 2em;
+            }
+
+            .hero-section h1 {
+                font-size: 3em;
+            }
+
+            .hero-section h2 {
+                font-size: 1.6em;
+            }
+
+            .hero-section p {
+                font-size: 1.05em;
+                margin-bottom: 30px;
+            }
+
+            .cta-button {
+                font-size: 1.2em;
+                padding: 16px 35px;
+            }
+
+            body::before, body::after {
+                filter: blur(60px); /* Less blur on smaller screens */
+                width: 250px;
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+                border-radius: var(--border-radius-md); /* Slightly less rounded */
+            }
+            .logo {
+                font-size: 1.8em;
+            }
+            .hero-section h1 {
+                font-size: 2.5em;
+            }
+            .hero-section h2 {
+                font-size: 1.3em;
+            }
+            .hero-section p {
+                font-size: 0.95em;
+                margin-bottom: 25px;
+            }
+            .cta-button {
+                font-size: 1em;
+                padding: 14px 28px;
+            }
+            body::before, body::after {
+                filter: blur(40px); /* Even less blur */
+                width: 180px;
+                height: 180px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header Section -->
-    <header>
-        <div class="container">
-            <nav>
-                <a href="#" class="logo">KLING AI</a>
-                <ul class="nav-links">
-                    <li><a href="#home">Trang chủ</a></li>
-                    <li><a href="#features">Tính năng</a></li>
-                    <li><a href="#about">Về chúng tôi</a></li>
-                    <li><a href="#lofi-zone">Lofi Zone</a></li>
-                    <li><a href="#contact">Liên hệ</a></li>
-                </ul>
-                <a href="#" class="btn-primary nav-btn">Bắt đầu miễn phí</a>
-                <div class="hamburger">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </nav>
-        </div>
-    </header>
+    <div class="container">
+        <header>
+            <a href="#" class="logo">KLING AI</a>
+        </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container text-center">
-            <h1>Mở khóa tiềm năng tương lai với <span class="highlight">KLING AI</span></h1>
-            <p class="hero-subtitle">Công nghệ AI tiên phong, biến thách thức thành cơ hội, định hình lại cách bạn làm việc và sáng tạo.</p>
-            <div class="hero-actions">
-                <a href="#features" class="btn-primary btn-large">Khám phá tính năng</a>
-                <a href="#contact" class="btn-secondary btn-large">Yêu cầu demo</a>
-            </div>
-        </div>
-    </section>
+        <main class="hero-section">
+            <h1>Deep Focus Lofi 2026</h1>
+            <h2>Unlocking Peak Productivity with KLING AI</h2>
+            <p>
+                Immerse yourself in the ultimate sonic environment designed to elevate your concentration. 
+                KLING AI's adaptive soundscapes blend seamless lo-fi beats with intelligent algorithms, 
+                creating a unique, personalized flow state. Tune out distractions, tune into your best self.
+            </p>
+            <a href="#" class="cta-button">Start Your Focus Journey</a>
+        </main>
+    </div>
 
-    <!-- Features Section -->
-    <section id="features" class="features section-padding">
-        <div class="container">
-            <h2 class="section-title text-center">Tính năng vượt trội của KLING AI</h2>
-            <p class="section-description text-center">KLING AI mang đến những giải pháp thông minh được thiết kế để tối ưu hóa hiệu suất và nâng cao trải nghiệm người dùng.</p>
-
-            <div class="feature-grid">
-                <div class="feature-item">
-                    <i class="fas fa-brain feature-icon"></i>
-                    <h3>Trí tuệ nhân tạo mạnh mẽ</h3>
-                    <p>Phân tích dữ liệu, tự động hóa quy trình và đưa ra dự đoán chính xác với các thuật toán AI hàng đầu.</p>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-cogs feature-icon"></i>
-                    <h3>Tùy chỉnh linh hoạt</h3>
-                    <p>KLING AI được xây dựng để thích ứng với mọi nhu cầu kinh doanh, từ quy mô nhỏ đến doanh nghiệp lớn.</p>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-shield-alt feature-icon"></i>
-                    <h3>Bảo mật tuyệt đối</h3>
-                    <p>Dữ liệu của bạn luôn được bảo vệ an toàn với các giao thức bảo mật tiên tiến nhất của chúng tôi.</p>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-lightbulb feature-icon"></i>
-                    <h3>Đổi mới không ngừng</h3>
-                    <p>Chúng tôi liên tục cập nhật và phát triển để đảm bảo bạn luôn có được công nghệ AI mới nhất.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about section-padding bg-light">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2 class="section-title">Về KLING AI</h2>
-                    <p>Tại KLING AI, chúng tôi tin rằng trí tuệ nhân tạo có thể là động lực thúc đẩy sự đổi mới và tăng trưởng cho mọi tổ chức. Sứ mệnh của chúng tôi là cung cấp các giải pháp AI mạnh mẽ, dễ tiếp cận và đáng tin cậy, giúp doanh nghiệp tối ưu hóa hoạt động, đưa ra quyết định thông minh hơn và tạo ra giá trị bền vững.</p>
-                    <p>Với đội ngũ kỹ sư và nhà khoa học dữ liệu hàng đầu, chúng tôi cam kết mang đến những sản phẩm vượt trội, giải quyết các thách thức phức tạp nhất của thế giới hiện đại.</p>
-                    <a href="#contact" class="btn-primary">Tìm hiểu thêm</a>
-                </div>
-                <div class="about-image">
-                    <!-- Placeholder image - replace with a relevant image for KLING AI -->
-                    <img src="https://via.placeholder.com/600x400/3A506B/FFFFFF?text=KLING+AI+Innovation" alt="About KLING AI">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Lofi Zone Section -->
-    <section id="lofi-zone" class="lofi-zone section-padding">
-        <div class="container text-center">
-            <h2 class="section-title">Deep Focus Lofi 2026 - Tăng cường sự tập trung</h2>
-            <p class="section-description">Đắm chìm vào không gian làm việc lý tưởng với playlist Deep Focus Lofi 2026. Âm nhạc nhẹ nhàng giúp bạn tập trung cao độ và sáng tạo không giới hạn cùng KLING AI.</p>
-            <div class="video-container">
-                <!-- Replace 'YOUR_YOUTUBE_PLAYLIST_ID' with the actual ID of 'Deep Focus Lofi 2026' -->
-                <!-- Example: Lofi Girl's Lofi Hip Hop Radio playlist ID is 'PLlGqL2663QGk5L6Kq769qS49M2G2281' -->
-                <iframe 
-                    width="560" 
-                    height="315" 
-                    src="https://www.youtube.com/embed/jfKfPfyMdFI?si=K0oQhGjXpB9JpS6C&controls=0&autoplay=1&mute=1&loop=1&playlist=jfKfPfyMdFI" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    allowfullscreen>
-                </iframe>
-                <p class="small-text"><i>Mẹo: Bật chế độ toàn màn hình và lặp lại trên YouTube để có trải nghiệm tốt nhất.</i></p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call to Action Section -->
-    <section class="cta section-padding">
-        <div class="container text-center">
-            <h2 class="section-title">Sẵn sàng trải nghiệm KLING AI?</h2>
-            <p class="section-description">Tham gia cùng các doanh nghiệp đang thay đổi tương lai. Bắt đầu hành trình AI của bạn ngay hôm nay!</p>
-            <a href="#contact" class="btn-primary btn-large">Liên hệ với chúng tôi</a>
-        </div>
-    </section>
-
-    <!-- Footer Section -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col logo-col">
-                    <h3>KLING AI</h3>
-                    <p>Giải pháp AI cho tương lai của bạn.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Liên kết nhanh</h4>
-                    <ul>
-                        <li><a href="#home">Trang chủ</a></li>
-                        <li><a href="#features">Tính năng</a></li>
-                        <li><a href="#about">Về chúng tôi</a></li>
-                        <li><a href="#lofi-zone">Lofi Zone</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Hỗ trợ</h4>
-                    <ul>
-                        <li><a href="#">FAQs</a></li>
-                        <li><a href="#">Chính sách bảo mật</a></li>
-                        <li><a href="#">Điều khoản dịch vụ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Theo dõi chúng tôi</h4>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 KLING AI. Mọi quyền được bảo lưu.</p>
-            </div>
-        </div>
+    <footer>
+        <p>&copy; 2024 KLING AI. All rights reserved.</p>
     </footer>
-
-    <!-- JavaScript for Mobile Navigation (Optional, but good for UX) -->
-    <script>
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        const navBtn = document.querySelector('.nav-btn');
-
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            navBtn.classList.toggle('active');
-            hamburger.querySelector('i').classList.toggle('fa-bars');
-            hamburger.querySelector('i').classList.toggle('fa-times');
-        });
-
-        // Close nav when a link is clicked
-        document.querySelectorAll('.nav-links li a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                navBtn.classList.remove('active');
-                hamburger.querySelector('i').classList.remove('fa-times');
-                hamburger.querySelector('i').classList.add('fa-bars');
-            });
-        });
-    </script>
 </body>
 </html>
