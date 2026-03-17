@@ -1,4 +1,4 @@
-name: AI Affiliate Auto-Pilot 2026 UI-Master
+name: AI Affiliate Auto-Pilot 2026 Ultimatum
 
 on:
   workflow_dispatch: 
@@ -23,7 +23,7 @@ jobs:
       - name: Install Modern Gemini SDK
         run: pip install -q google-genai
 
-      - name: Run AI Agent UI-Designer
+      - name: Run AI Agent UI-Master
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
@@ -31,7 +31,7 @@ jobs:
           import os
           from google import genai
           import sys
-          import re
+          import datetime
 
           try:
               api_key = os.environ.get('GEMINI_API_KEY')
@@ -39,37 +39,31 @@ jobs:
               
               model_id = 'gemini-2.5-flash' 
               
-              # Câu lệnh (Prompt) được thiết kế lại để ép AI viết CSS chuyên nghiệp
-              task = """Hãy đóng vai một chuyên gia UI/UX. Viết mã HTML cho Landing Page KLING AI.
-              YÊU CẦU BẮT BUỘC:
-              1. Phải có thẻ <style> bên trong <head> với CSS hiện đại (Glassmorphism, Dark mode).
-              2. Sử dụng font chữ Google Fonts (như Inter hoặc Montserrat).
-              3. Nội dung tập trung vào playlist 'Deep Focus Lofi 2026'.
-              4. Phải có nút bấm (CTA) đẹp mắt, có hiệu ứng hover.
-              5. Trả về DUY NHẤT một khối mã bắt đầu từ <!DOCTYPE html>."""
+              # Prompt cực gắt: Ép AI viết giao diện ĐẸP và có CSS
+              task = """Viết mã HTML Landing Page giới thiệu KLING AI. 
+              YÊU CẦU BẮT BUỘC: 
+              1. Phải có phần <style> chứa CSS làm giao diện ĐẸP, HIỆN ĐẠI, MÀU SẮC CHILL kiểu LOFI.
+              2. Nội dung tiếng Việt, tập trung vào playlist 'Deep Focus Lofi 2026'.
+              3. Chỉ trả về mã HTML, không giải thích."""
 
-              print(f"🚀 Đang thiết kế giao diện cao cấp với: {model_id}...")
+              print(f"🚀 Đang ép xung thiết kế...")
               
-              response = client.models.generate_content(
-                  model=model_id,
-                  contents=task
-              )
+              response = client.models.generate_content(model=model_id, contents=task)
               
               if response.text:
-                  raw_content = response.text.strip()
+                  now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                  content = response.text.strip()
+                  # Làm sạch markdown
+                  clean_html = content.replace('```html', '').replace('```', '').strip()
                   
-                  # Kỹ thuật trích xuất linh hoạt hơn
-                  if "<!DOCTYPE html>" in raw_content:
-                      final_html = raw_content[raw_content.find("<!DOCTYPE html>"):raw_content.rfind("</html>")+7]
-                  else:
-                      final_html = raw_content.replace('```html', '').replace('```', '').strip()
+                  # Thêm timestamp vào cuối file để ép GitHub cập nhật
+                  final_code = clean_html + f"\n"
                   
                   with open('index.html', 'w', encoding='utf-8') as f:
-                      f.write(final_html)
-                  print("✅ Đã xuất bản trang web đầy đủ CSS!")
+                      f.write(final_code)
+                  print("✅ Đã tạo file mới có kèm mốc thời gian.")
               else:
                   sys.exit(1)
-
           except Exception as e:
               print(f"❌ Lỗi: {e}")
               sys.exit(1)
@@ -80,9 +74,5 @@ jobs:
           git config --global user.name "Gemini-AI-Bot"
           git config --global user.email "bot@google.ai"
           git add index.html
-          if git diff --staged --quiet; then
-            echo "No changes."
-          else
-            git commit -m "UI Upgrade: Full CSS and Modern Design"
-            git push
-          fi
+          git commit -m "UI Forced Update: $(date)"
+          git push
