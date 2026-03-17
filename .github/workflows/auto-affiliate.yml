@@ -1,24 +1,26 @@
-name: AI Affiliate Auto-Pilot
+name: AI Affiliate Auto-Pilot 2026
 
 on:
-  workflow_dispatch: # Cho phép bạn bấm nút chạy bằng tay để kiểm tra
+  workflow_dispatch: 
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Quan trọng: Cấp quyền ghi để Bot có thể tự lưu file vào kho của bạn
     permissions:
       contents: write
+      
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # Nâng cấp lên v4 để hỗ trợ Node mới
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5 # Nâng cấp lên v5
         with:
-          python-version: '3.9'
+          python-version: '3.11'
 
       - name: Install Dependencies
-        run: pip install google-generativeai requests
+        run: pip install google-generativeai
 
       - name: Run AI Agent
         env:
@@ -27,26 +29,27 @@ jobs:
           python - <<EOF
           import os
           import google.generativeai as genai
-          import requests
 
-          # Cấu hình Gemini
-          genai.configure(api_key=os.environ['GEMINI_API_KEY'])
-          model = genai.GenerativeModel('gemini-1.5-flash')
+          try:
+              genai.configure(api_key=os.environ['GEMINI_API_KEY'])
+              model = genai.GenerativeModel('gemini-1.5-flash')
 
-          # Bước 1: Giả lập kỹ năng S1 - Lấy dữ liệu từ Affitor (Ví dụ top 3 AI Video)
-          # Lưu ý: Ở bản nâng cao chúng ta sẽ dùng API thật, đây là bản mẫu tự động
-          prompt = """Bạn là chuyên gia từ Affiliate Skills. 
-          Nhiệm vụ: 
-          1. Tìm sản phẩm AI Video hot nhất hiện nay (ưu tiên Kling AI hoặc HeyGen). 
-          2. Viết lại TOÀN BỘ file index.html cho một Landing Page chuẩn SEO, hiện đại.
-          3. Nội dung tập trung vào ngách 'Nhạc Lofi 2026'.
-          4. Chỉ trả về mã HTML, không giải thích gì thêm."""
+              prompt = """Viết mã HTML/CSS cho một Landing Page chuyên nghiệp về KLING AI dành cho ngách Nhạc Lofi. 
+              Chỉ trả về mã code, không dùng các dấu ngoặc ``` hay chữ 'html' ở đầu/cuối."""
 
-          response = model.generate_content(prompt)
-          
-          # Lưu kết quả vào file index.html
-          with open('index.html', 'w', encoding='utf-8') as f:
-              f.write(response.text.replace('```html', '').replace('```', ''))
+              response = model.generate_content(prompt)
+              content = response.text.strip()
+
+              # Xử lý nếu AI vẫn trả về markdown
+              if content.startswith("```"):
+                  content = "\n".join(content.split("\n")[1:-1])
+
+              with open('index.html', 'w', encoding='utf-8') as f:
+                  f.write(content)
+              print("Xử lý file index.html thành công!")
+          except Exception as e:
+              print(f"Lỗi rồi: {e}")
+              exit(1)
           EOF
 
       - name: Commit and Push
@@ -54,5 +57,10 @@ jobs:
           git config --global user.name "Gemini-AI-Bot"
           git config --global user.email "bot@google.ai"
           git add index.html
-          git commit -m "AI tự động cập nhật Landing Page mới nhất" || echo "Không có thay đổi"
-          git push
+          # Kiểm tra xem có gì thay đổi không trước khi commit để tránh lỗi
+          if git diff --staged --quiet; then
+            echo "Không có thay đổi nào để cập nhật."
+          else
+            git commit -m "AI tự động cập nhật Landing Page [v2026]"
+            git push
+          fi
