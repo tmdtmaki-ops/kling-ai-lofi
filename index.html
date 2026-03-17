@@ -1,200 +1,674 @@
-<!DOCTYPE html>
-<html lang="vi">
+<!DOCTYPE >
+< lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="KLING AI - Công cụ tạo Visual Loop cực chill cho kênh nhạc Lofi, nhạc thiền và nhạc không lời. Tăng tỷ lệ giữ chân người xem ngay hôm nay.">
-    <title>KLING AI | Tạo Visual Loop Lofi Cực Chill</title>
+    <title>KLING AI - Lofi Music Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* CSS Reset & Variables */
-        :root {
-            --bg-color: #0f172a;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent: #8b5cf6;
-            --accent-hover: #7c3aed;
-            --card-bg: #1e293b;
-        }
-
-        * {
+        /* General Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #a88d7f; /* Muted terracotta/rose */
+            --secondary-color: #6a7770; /* Muted sage green */
+            --accent-color: #d4a77d; /* Warm muted orange */
+            --text-color: #4a4a4a;
+            --light-text-color: #f0f0f0;
+            --bg-color-light: #fdfaf7; /* Off-white */
+            --bg-color-dark: #3a3f47; /* Dark grayish blue */
+            --border-color: rgba(0, 0, 0, 0.1);
+            --hover-effect: rgba(0, 0, 0, 0.05);
+
+            --font-heading: 'IBM Plex Mono', monospace;
+            --font-body: 'Inter', sans-serif;
+        }
+
+         {
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            font-family: var(--font-body);
             line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color-light);
+            overflow-x: hidden;
         }
 
-        /* Container */
+        /* Container for max-width */
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 100px 20px 80px;
-            background: linear-gradient(180deg, rgba(15,23,42,1) 0%, rgba(30,41,59,1) 100%);
-        }
-
-        .hero h1 {
-            font-size: 3rem;
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            color: var(--text-color);
+            margin-bottom: 0.8em;
             line-height: 1.2;
-            margin-bottom: 20px;
-            background: -webkit-linear-gradient(#c4b5fd, #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 700px;
-            margin: 0 auto 40px;
+        h1 { font-size: 3em; }
+        h2 { font-size: 2.5em; }
+        h3 { font-size: 1.8em; }
+
+        p {
+            margin-bottom: 1em;
         }
 
-        /* Call To Action Button */
-        .cta-button {
-            display: inline-block;
-            background-color: var(--accent);
-            color: #fff;
-            padding: 18px 40px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 50px;
+        a {
+            color: var(--primary-color);
             text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            text-transform: uppercase;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+            cursor: pointer;
+            border: none;
+            font-size: 0.9em;
+            letter-spacing: 0.05em;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
         }
 
-        .cta-button:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 25px rgba(139, 92, 246, 0.4);
+        .primary-btn {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
         }
 
-        /* Use Case Section (The Playlist) */
-        .use-case {
+        .primary-btn:hover {
+            background-color: var(--accent-color);
+            box-shadow: 4px 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .secondary-btn {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 10px 23px;
+        }
+
+        .secondary-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            box-shadow: 4px 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .large-btn {
+            padding: 15px 35px;
+            font-size: 1.1em;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-color-light);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            font-weight: 600;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+            left: 0;
+            background: var(--accent-color);
+        }
+
+        /* Sections */
+        section {
             padding: 80px 0;
             text-align: center;
         }
 
-        .use-case-box {
-            background-color: var(--card-bg);
-            border: 1px solid #334155;
-            border-radius: 16px;
-            padding: 50px 30px;
+        section:nth-of-type(even) {
+            background-color: rgba(0, 0, 0, 0.03);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--bg-color-light) 0%, #f7f0e7 100%);
+            position: relative;
+            padding: 120px 0;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPGcgZmlsbD0iI0YzRjBGMyIgc3Ryb2tlPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHg9IjAiIHk9IjAiPjwvcmVjdD4KICAgICAgICA8cmVjdCB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4PSIyIiB5PSIyIj48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iNCIgeT0iNCI+PC9yZWN0PgogICAgICAgIDxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHg9IjYiIHk9IjYiPjwvcmVjdD4KICAgICAgICA8cmVjdCB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4PSI4IiB5PSI4Ij48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iMTAiIHk9IjEwIj48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iMTIiIHk9IjEyIj48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iMTQiIHk9IjE0Ij48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iMTYiIHk9IjE2Ij48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iMTgiIHk9IjE4Ij48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iMjAiIHk9IjIwIj48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iMjIiIHk9IjIyIj48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGheiWdodD0iMSIgeD0iMjQiIHk9IjI0Ij48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iMjYiIHk9IjI2Ij48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iMjgiIHk9IjI4Ij48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iMzAiIHk9IjMwIj48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iMzIiIHk9IjMyIj48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iMzQiIHk9IjM0Ij48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iMzYiIHk9IjM2Ij48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iMzgSIHk9IjM4Ij48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iNDAiIHk9IjQwIj48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iNDIiIHk9IjQyIj48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iNDQiIHk9IjQ0Ij48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iNDYiIHk9IjQ2Ij48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iNDgiIHk9IjQ4Ij48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iNTAiIHk9IjUwIj48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iNTIiIHk9IjUyIj48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iNTQiIHk9IjU0Ij48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iNTYiIHk9IjU2Ij48L3JlY3Q+CiAgICAgICAgPHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgeD0iNTgiIHk9IjU4Ij48L3JlY3Q+CiAgICA8L2c+Cjwvc3ZnPg==');
+            background-size: 60px 60px;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
             max-width: 800px;
             margin: 0 auto;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
 
-        .use-case-box h2 {
-            font-size: 2rem;
+        .hero-section h1 {
+            font-size: 4em;
             margin-bottom: 20px;
-            color: #e2e8f0;
+            color: var(--text-color);
+            letter-spacing: -2px;
+            font-weight: 700;
         }
 
-        .highlight {
-            color: #38bdf8;
-            font-style: italic;
+        .hero-section p {
+            font-size: 1.25em;
+            margin-bottom: 40px;
+            color: var(--text-color);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-section .btn {
+            margin: 0 10px;
         }
 
         /* Features Section */
-        .features {
-            display: flex;
-            justify-content: space-between;
-            gap: 30px;
-            padding: 60px 0;
-            flex-wrap: wrap;
+        .features-section h2, .how-it-works-section h2, .cta-bottom-section h2 {
+            margin-bottom: 60px;
+            font-size: 2.8em;
+            letter-spacing: -1px;
         }
 
-        .feature-card {
-            background-color: var(--card-bg);
-            flex: 1;
-            min-width: 300px;
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            background-color: var(--bg-color-light);
             padding: 30px;
-            border-radius: 12px;
-            text-align: left;
-            border-top: 4px solid var(--accent);
-        }
-
-        .feature-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: #f1f5f9;
-        }
-
-        .feature-card p {
-            color: var(--text-muted);
-        }
-
-        /* Footer / Bottom CTA */
-        .bottom-cta {
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
             text-align: center;
-            padding: 80px 20px;
-            background-color: #020617;
         }
 
-        .bottom-cta h2 {
-            font-size: 2.2rem;
-            margin-bottom: 30px;
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            .hero p { font-size: 1rem; }
-            .use-case-box h2 { font-size: 1.6rem; }
-            .features { flex-direction: column; }
+        .feature-item i {
+            font-size: 3em;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-item h3 {
+            font-size: 1.5em;
+            color: var(--text-color);
+            margin-bottom: 15px;
+        }
+
+        .feature-item p {
+            color: var(--text-color);
+            font-size: 1em;
+        }
+
+        /* How It Works Section */
+        .steps-grid {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .step-item {
+            flex: 0 0 300px;
+            max-width: 350px;
+            text-align: center;
+            padding: 30px;
+            background-color: var(--bg-color-light);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .step-item:not(:last-child)::after {
+            content: '\2192'; /* Right arrow */
+            position: absolute;
+            top: 50%;
+            right: -40px;
+            transform: translateY(-50%);
+            font-size: 2em;
+            color: var(--primary-color);
+            z-index: 5;
+        }
+
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: var(--light-text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5em;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .step-item h3 {
+            font-size: 1.4em;
+            color: var(--text-color);
+            margin-bottom: 10px;
+        }
+
+        .step-item p {
+            color: var(--text-color);
+        }
+
+
+        /* CTA Bottom Section */
+        .cta-bottom-section {
+            background-color: var(--secondary-color);
+            color: var(--light-text-color);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-bottom-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTAgMTBMMTAgMEwyMCAxMEwxMCAyMEwwIDEwWiIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLW9wYWNpdHk9IjAuMSIgc3Ryb2tlLXdpZHRoPSIxIi8+Cjwvc3ZnPg==');
+            background-size: 20px 20px;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .cta-bottom-section .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-bottom-section h2 {
+            color: var(--light-text-color);
+            margin-bottom: 20px;
+            font-size: 3em;
+        }
+
+        .cta-bottom-section p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-bottom-section .primary-btn {
+            background-color: var(--accent-color);
+            color: var(--bg-color-dark);
+        }
+
+        .cta-bottom-section .primary-btn:hover {
+            background-color: #f0c39f;
+        }
+
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-color-dark);
+            color: var(--light-text-color);
+            padding: 60px 0 20px 0;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .footer-brand, .footer-links, .footer-social {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-brand h3 {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-links h4, .footer-social h4 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .footer-links ul, .footer-social ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links ul li, .footer-social ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a, .footer-social a {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-links a:hover, .footer-social a:hover {
+            color: var(--light-text-color);
+        }
+
+        .footer-social ul {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-start;
+        }
+
+        .footer-social ul li a i {
+            font-size: 1.5em;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-bottom a {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--light-text-color);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            h1 { font-size: 3em; }
+            h2 { font-size: 2em; }
+            .hero-section p { font-size: 1.1em; }
+
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav ul li {
+                margin: 0 15px 10px 15px;
+            }
+
+            .hero-section {
+                padding: 80px 0;
+            }
+            .hero-section .btn {
+                margin-bottom: 15px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .step-item:not(:last-child)::after {
+                content: '\2193'; /* Down arrow */
+                top: auto;
+                bottom: -40px; /* Adjust for vertical positioning */
+                left: 50%;
+                right: auto;
+                transform: translateX(-50%);
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-social ul {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5em; }
+            h2 { font-size: 1.8em; }
+            .hero-section p { font-size: 1em; }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.8em;
+            }
+            .large-btn {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+
+            .hero-section .btn {
+                display: block;
+                margin: 0 auto 15px auto;
+                max-width: 250px;
+            }
+
+            .logo {
+                font-size: 1.5em;
+            }
         }
     </style>
 </head>
 <body>
-
-    <section class="hero">
+    <header>
         <div class="container">
-            <h1>Biến Âm Nhạc Thành Không Gian Thị Giác Cực Chill</h1>
-            <p>Đừng để âm nhạc tuyệt vời của bạn bị bỏ qua chỉ vì một bức ảnh tĩnh nhàm chán. Sử dụng KLING AI để tạo ra những Visual Loop (vòng lặp hình ảnh) nghệ thuật, hoàn hảo cho các kênh nhạc không lời, lofi và nhạc thiền.</p>
-            <a href="#affiliate-link-here" class="cta-button">Dùng thử KLING AI miễn phí</a>
+            <div class="logo">KLING AI</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
         </div>
-    </section>
+    </header>
 
-    <section class="use-case container">
-        <div class="use-case-box">
-            <h2>Mảnh ghép hoàn hảo cho Playlist của bạn</h2>
-            <p style="font-size: 1.1rem; color: var(--text-muted);">Bạn đang xây dựng một không gian âm nhạc như <span class="highlight">"Deep Focus Lofi 2026 - Nhạc Tập Trung Học Tập & Làm Việc"</span>? <br><br>Khán giả không chỉ cần âm thanh để tập trung, họ cần một bối cảnh thị giác để "đắm chìm". KLING AI giúp bạn tạo ra khung cảnh phòng học mưa rơi, quán cafe neon tĩnh lặng hay bầu trời đêm lofi lặp lại vô tận chỉ bằng vài dòng miêu tả. Tăng thời lượng xem video (Retention rate) một cách chóng mặt!</p>
-        </div>
-    </section>
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Generate Your Perfect Lofi Soundtrack with AI</h1>
+                    <p>Effortlessly create unique, chill lofi beats tailored to your mood and style. Dive into a world of endless sonic possibilities.</p>
+                    <a href="#" class="btn primary-btn">Start Creating Now</a>
+                    <a href="#" class="btn secondary-btn">Learn More</a>
+                </div>
+            </div>
+        </section>
 
-    <section class="container features">
-        <div class="feature-card">
-            <h3>🎨 Tạo Visual Loop Không Giới Hạn</h3>
-            <p>Từ phong cách Ghibli, Cyberpunk đến Pixel Art. Chỉ cần nhập Text (văn bản) hoặc Hình ảnh, KLING AI sẽ lo phần chuyển động mượt mà và liền mạch.</p>
-        </div>
-        <div class="feature-card">
-            <h3>⏱️ Tiết Kiệm Thời Gian & Chi Phí</h3>
-            <p>Quên việc phải thuê Animator đắt đỏ với hàng tuần chờ đợi. Tự tay sản xuất video nền chất lượng 4K cho kênh YouTube của bạn chỉ trong vài phút.</p>
-        </div>
-        <div class="feature-card">
-            <h3>📈 Tối Ưu Thuật Toán YouTube</h3>
-            <p>Video có hình ảnh chuyển động giữ chân người nghe lâu hơn 300% so với ảnh tĩnh. Tín hiệu này giúp YouTube liên tục đề xuất playlist của bạn đến người nghe mới.</p>
-        </div>
-    </section>
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-brain"></i>
+                        <h3>Intelligent AI Generation</h3>
+                        <p>Our advanced AI understands the nuances of lofi, crafting authentic and original tracks.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-sliders-h"></i>
+                        <h3>Customizable Parameters</h3>
+                        <p>Fine-tune genre, mood, tempo, and instrumentation to match your vision perfectly.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-magic"></i>
+                        <h3>Instant Creativity</h3>
+                        <p>Generate high-quality lofi tracks in seconds, sparking inspiration whenever you need it.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-music"></i>
+                        <h3>Royalty-Free & Unique</h3>
+                        <p>All generated music is 100% royalty-free, ready for personal or commercial use.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section class="bottom-cta">
+        <section id="how-it-works" class="how-it-works-section">
+            <div class="container">
+                <h2>How It Works</h2>
+                <div class="steps-grid">
+                    <div class="step-item">
+                        <div class="step-icon"><i class="fas fa-keyboard"></i></div>
+                        <h3>1. Input Your Vibe</h3>
+                        <p>Tell KLING AI your desired mood, instruments, or genre variations.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-icon"><i class="fas fa-cogs"></i></div>
+                        <h3>2. AI Does the Work</h3>
+                        <p>Our intelligent algorithms compose a unique lofi track just for you.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-icon"><i class="fas fa-download"></i></div>
+                        <h3>3. Download & Enjoy</h3>
+                        <p>Preview, refine, and download your custom lofi masterpiece instantly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta-bottom" class="cta-bottom-section">
+            <div class="container">
+                <h2>Ready to Create Your Next Lofi Gem?</h2>
+                <p>Join thousands of creators shaping their sound with KLING AI. Get started today!</p>
+                <a href="#" class="btn primary-btn large-btn">Start My Lofi Journey</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
         <div class="container">
-            <h2>Sẵn sàng nâng tầm kênh nhạc không lời của bạn?</h2>
-            <p style="color: var(--text-muted); margin-bottom: 30px;">Hàng ngàn Creator đã tăng trưởng doanh thu từ YouTube và Spotify nhờ hình ảnh sắc nét. Đến lượt bạn rồi.</p>
-            <a href="#affiliate-link-here" class="cta-button">Dùng thử KLING AI miễn phí</a>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>KLING AI</h3>
+                    <p>Lofi Music Generator</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#about">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Follow Us</h4>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 KLING AI. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
         </div>
-    </section>
-
+    </footer>
 </body>
-</html>
+</>
