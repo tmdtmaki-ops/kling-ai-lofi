@@ -1,4 +1,4 @@
-name: AI Affiliate Auto-Pilot 2026 Stable
+name: AI Affiliate Auto-Pilot 2026 Modern-SDK
 
 on:
   workflow_dispatch: 
@@ -21,47 +21,49 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install Dependencies
-        run: pip install -q google-generativeai
+      - name: Install Modern Gemini SDK
+        # Nâng cấp lên thư viện google-genai mới nhất của năm 2026
+        run: pip install -q google-genai
 
       - name: Run AI Agent
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        # Chú ý: Dấu nháy đơn quanh 'EOF' là chìa khóa sửa lỗi
         run: |
           python - <<'EOF'
           import os
-          import google.generativeai as genai
+          from google import genai
           import sys
 
           try:
               api_key = os.environ.get('GEMINI_API_KEY')
               if not api_key:
-                  print("Error: Missing GEMINI_API_KEY")
+                  print("❌ Error: Missing GEMINI_API_KEY")
                   sys.exit(1)
 
-              genai.configure(api_key=api_key)
-              model = genai.GenerativeModel('gemini-1.5-flash')
-
-              # Dùng chuỗi f-string đơn giản để tránh lỗi xuống dòng
+              # Khởi tạo Client theo cú pháp mới của năm 2026
+              client = genai.Client(api_key=api_key)
+              
               task = "Viết mã HTML/CSS Landing Page cho KLING AI ngách nhạc Lofi. Chỉ trả về code HTML, không giải thích."
               
-              response = model.generate_content(task)
-              if not response or not response.text:
+              # Sử dụng model Gemini 2.0 Flash hiện đại nhất
+              response = client.models.generate_content(
+                  model='gemini-2.0-flash',
+                  contents=task
+              )
+              
+              if not response.text:
+                  print("❌ Error: No content returned")
                   sys.exit(1)
 
-              raw_html = response.text.strip()
-              
-              # Làm sạch mã: Xóa bỏ các thẻ markdown ```html nếu có
-              clean_html = raw_html.replace('```html', '').replace('```', '').strip()
+              clean_html = response.text.replace('```html', '').replace('```', '').strip()
 
               with open('index.html', 'w', encoding='utf-8') as f:
                   f.write(clean_html)
               
-              print("File index.html created successfully.")
+              print("✅ Website updated successfully with Gemini 2.0 SDK.")
 
           except Exception as e:
-              print(f"System Error: {e}")
+              print(f"❌ System Error: {e}")
               sys.exit(1)
           EOF
 
@@ -73,6 +75,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes detected."
           else
-            git commit -m "AI Auto-update [v2026.stable]"
+            git commit -m "AI Auto-update [Modern SDK 2026]"
             git push
           fi
