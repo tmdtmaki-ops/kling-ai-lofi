@@ -1,26 +1,30 @@
-name: AI Affiliate Auto-Pilot 2026
+name: AI Affiliate Auto-Pilot 2026 Optimized
 
 on:
   workflow_dispatch: 
 
+# Ép toàn bộ quy trình sử dụng Node.js 24 để xóa cảnh báo
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    # Quan trọng: Cấp quyền ghi để Bot có thể tự lưu file vào kho của bạn
     permissions:
       contents: write
       
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4 # Nâng cấp lên v4 để hỗ trợ Node mới
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5 # Nâng cấp lên v5
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Install Dependencies
-        run: pip install google-generativeai
+        run: |
+          pip install -q google-generativeai
 
       - name: Run AI Agent
         env:
@@ -29,27 +33,37 @@ jobs:
           python - <<EOF
           import os
           import google.generativeai as genai
+          import sys
 
           try:
-              genai.configure(api_key=os.environ['GEMINI_API_KEY'])
+              api_key = os.environ.get('GEMINI_API_KEY')
+              if not api_key:
+                  print("❌ LỖI: Không tìm thấy GEMINI_API_KEY trong Secrets!")
+                  sys.exit(1)
+
+              genai.configure(api_key=api_key)
               model = genai.GenerativeModel('gemini-1.5-flash')
 
-              prompt = """Viết mã HTML/CSS cho một Landing Page chuyên nghiệp về KLING AI dành cho ngách Nhạc Lofi. 
-              Chỉ trả về mã code, không dùng các dấu ngoặc ``` hay chữ 'html' ở đầu/cuối."""
-
+              prompt = "Viết mã HTML/CSS Landing Page cho KLING AI ngách nhạc Lofi. CHỈ trả về code, KHÔNG giải thích, KHÔNG dùng dấu ngoặc ```."
+              
               response = model.generate_content(prompt)
-              content = response.text.strip()
+              
+              if not response.text:
+                  print("❌ LỖI: Gemini không trả về nội dung!")
+                  sys.exit(1)
 
-              # Xử lý nếu AI vẫn trả về markdown
+              content = response.text.strip()
+              # Loại bỏ markdown nếu AI cố tình thêm vào
               if content.startswith("```"):
-                  content = "\n".join(content.split("\n")[1:-1])
+                  content = "\n".join(content.split("\n")[1:-1]).replace("html", "")
 
               with open('index.html', 'w', encoding='utf-8') as f:
                   f.write(content)
-              print("Xử lý file index.html thành công!")
+              print("✅ Thành công: Đã tạo file index.html mới.")
+
           except Exception as e:
-              print(f"Lỗi rồi: {e}")
-              exit(1)
+              print(f"❌ LỖI HỆ THỐNG: {str(e)}")
+              sys.exit(1)
           EOF
 
       - name: Commit and Push
@@ -57,10 +71,9 @@ jobs:
           git config --global user.name "Gemini-AI-Bot"
           git config --global user.email "bot@google.ai"
           git add index.html
-          # Kiểm tra xem có gì thay đổi không trước khi commit để tránh lỗi
           if git diff --staged --quiet; then
-            echo "Không có thay đổi nào để cập nhật."
+            echo "Không có thay đổi."
           else
-            git commit -m "AI tự động cập nhật Landing Page [v2026]"
+            git commit -m "AI cập nhật website [Auto-Pilot]"
             git push
           fi
