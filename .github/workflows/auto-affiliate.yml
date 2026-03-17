@@ -1,4 +1,4 @@
-name: AI Affiliate Auto-Pilot 2026 Final-Fixed
+name: AI Affiliate Auto-Pilot 2026 Ultimate
 
 on:
   workflow_dispatch: 
@@ -24,7 +24,7 @@ jobs:
       - name: Install Modern Gemini SDK
         run: pip install -q google-genai
 
-      - name: Run AI Agent Smart-Mode
+      - name: Run AI Agent 2026
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
@@ -37,13 +37,13 @@ jobs:
               api_key = os.environ.get('GEMINI_API_KEY')
               client = genai.Client(api_key=api_key)
               
-              # Thử dùng tên model đầy đủ theo chuẩn 2026
-              # Nếu lỗi, script sẽ báo danh sách model khả dụng
-              model_id = 'gemini-1.5-pro' 
+              # Sử dụng model ID chính xác từ danh sách khả dụng của bạn
+              # Chúng ta ưu tiên 2.5-flash vì nó ổn định và hiện đại
+              model_id = 'gemini-2.5-flash' 
               
               task = "Viết mã HTML/CSS Landing Page chuyên nghiệp cho KLING AI ngách nhạc Lofi. CHỈ trả về code, KHÔNG giải thích."
 
-              print(f"🚀 Đang gọi Gemini với Model ID: {model_id}...")
+              print(f"🚀 Đang triệu hồi sức mạnh từ: {model_id}...")
               
               response = client.models.generate_content(
                   model=model_id,
@@ -52,26 +52,19 @@ jobs:
               
               if response.text:
                   content = response.text.strip()
-                  # Làm sạch code
+                  # Làm sạch mã HTML khỏi các ký tự Markdown
                   if content.startswith("```"):
                       content = "\n".join(content.split("\n")[1:-1]).replace("html", "")
                   
                   with open('index.html', 'w', encoding='utf-8') as f:
                       f.write(content)
-                  print("✅ Thành công rực rỡ! Trang web đã được cập nhật.")
+                  print(f"✅ Thành công! Website đã được nâng cấp bởi {model_id}.")
               else:
-                  print("❌ Gemini trả về kết quả trống.")
+                  print("❌ Lỗi: Gemini trả về kết quả rỗng.")
                   sys.exit(1)
 
           except Exception as e:
-              print(f"❌ Lỗi: {e}")
-              print("\n🔍 ĐANG KIỂM TRA DANH SÁCH MODEL KHẢ DỤNG CHO BẠN...")
-              try:
-                  # Đoạn mã thám tử: Liệt kê các model bạn thực sự có quyền dùng
-                  for m in client.models.list():
-                      print(f" > Model khả dụng: {m.name}")
-              except:
-                  pass
+              print(f"❌ Lỗi hệ thống: {e}")
               sys.exit(1)
           EOF
 
@@ -81,8 +74,8 @@ jobs:
           git config --global user.email "bot@google.ai"
           git add index.html
           if git diff --staged --quiet; then
-            echo "No changes."
+            echo "Không có thay đổi để cập nhật."
           else
-            git commit -m "AI Auto-Pilot: Final Fix 2026"
+            git commit -m "AI Auto-Pilot: Deploying via Gemini 2.5 Flash"
             git push
           fi
