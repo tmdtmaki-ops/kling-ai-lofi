@@ -1,157 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KLING AI - Lofi Music Generation</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <title>KLING AI - Video Loops cho Deep Focus Lofi 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --color-dark-bg: #1a202c;
-            --color-medium-bg: #2d3748;
-            --color-light-text: #cbd5e0;
-            --color-accent-purple: #9f7aea;
-            --color-accent-blue: #667eea;
-            --color-hover-grey: #718096;
-            --color-border-grey: #4a5568;
+            --primary-blue: #5D7DD4;
+            --secondary-purple: #8C77B7;
+            --accent-gold: #FFD700;
+            --text-dark: #333333;
+            --text-light: #F0F0F0;
+            --bg-light: #FFFFFF;
+            --bg-accent: #F8F8F8;
+            --border-color: #E0E0E0;
         }
 
-        /* Basic Reset & Global Styles */
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Lato', sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: var(--color-light-text);
-            background-color: var(--color-dark-bg);
-            overflow-x: hidden;
-        }
-
-        a {
-            color: var(--color-accent-blue);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: var(--color-accent-purple);
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Poppins', sans-serif;
-            margin-bottom: 1rem;
-            color: var(--color-light-text);
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            scroll-behavior: smooth;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 0 20px;
         }
 
-        .btn {
-            display: inline-block;
-            background-color: var(--color-accent-purple);
-            color: var(--color-dark-bg);
-            padding: 0.8rem 2rem;
-            border-radius: 5px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: var(--color-accent-blue);
-            transform: translateY(-2px);
-            color: var(--color-light-text);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--color-accent-blue);
-            color: var(--color-accent-blue);
-            padding: 0.7rem 1.9rem;
-        }
-
-        .btn-outline:hover {
-            background-color: var(--color-accent-blue);
-            color: var(--color-dark-bg);
-            border-color: var(--color-accent-blue);
-        }
-
-        /* Header */
-        .header {
-            background-color: var(--color-dark-bg);
-            padding: 1.5rem 0;
-            border-bottom: 1px solid var(--color-border-grey);
+        header {
+            background-color: var(--bg-light);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        .header .container {
+        header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.8rem;
+            font-family: 'Lora', serif;
+            font-size: 28px;
             font-weight: 700;
-            color: var(--color-light-text);
-            letter-spacing: -0.05em;
+            color: var(--primary-blue);
+            text-decoration: none;
         }
 
-        .logo span {
-            color: var(--color-accent-purple);
-        }
-
-        .nav ul {
+        nav ul {
             list-style: none;
             display: flex;
-            gap: 2rem;
         }
 
-        .nav a {
-            color: var(--color-light-text);
-            font-weight: 400;
-            font-size: 1.05rem;
-            position: relative;
+        nav ul li {
+            margin-left: 30px;
         }
 
-        .nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background-color: var(--color-accent-purple);
-            bottom: -5px;
-            left: 0;
-            transition: width 0.3s ease;
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: color 0.3s ease;
         }
 
-        .nav a:hover::after {
-            width: 100%;
+        nav ul li a:hover {
+            color: var(--primary-blue);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #4A6AC2;
+            transform: translateY(-2px);
+        }
+
+        .btn.btn-secondary {
+            background-color: var(--accent-gold);
+            color: var(--text-dark);
+        }
+
+        .btn.btn-secondary:hover {
+            background-color: #E0BF00;
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--color-dark-bg) 0%, #171d26 100%);
-            padding: 8rem 0;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-purple) 100%);
+            color: var(--text-light);
+            padding: 100px 0;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -164,9 +124,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M100 0L0 100h100V0zM0 0l100 100V0H0z" fill="%232d3748" opacity="0.1" fill-rule="evenodd"/%3E%3C/svg%3E');
-            background-size: 200px 200px;
-            opacity: 0.15;
+            background: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 L 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)"/></svg>') repeat;
+            opacity: 0.3;
             z-index: 1;
         }
 
@@ -176,416 +135,462 @@
         }
 
         .hero h1 {
-            font-size: 3.8rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            max-width: 700px;
-            margin: 0 auto 2.5rem auto;
-            color: var(--color-light-text);
-        }
-
-        .hero .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-        }
-
-        /* Features Section */
-        .features {
-            background-color: var(--color-medium-bg);
-            padding: 6rem 0;
-            text-align: center;
-        }
-
-        .features h2 {
-            font-size: 2.5rem;
-            margin-bottom: 3.5rem;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .feature-item {
-            background-color: var(--color-dark-bg);
-            padding: 2.5rem;
-            border-radius: 10px;
-            text-align: left;
-            border: 1px solid var(--color-border-grey);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .feature-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--color-accent-purple);
-        }
-
-        .feature-item .icon {
-            font-size: 2.5rem;
-            color: var(--color-accent-purple);
-            margin-bottom: 1rem;
-            display: inline-block;
-        }
-
-        .feature-item h3 {
-            font-size: 1.7rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .feature-item p {
-            color: var(--color-light-text);
-        }
-
-        /* How It Works Section */
-        .how-it-works {
-            padding: 6rem 0;
-            text-align: center;
-        }
-
-        .how-it-works h2 {
-            font-size: 2.5rem;
-            margin-bottom: 3.5rem;
-        }
-
-        .steps-grid {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .step-item {
-            flex: 1;
-            min-width: 280px;
-            max-width: 350px;
-            position: relative;
-            padding: 2rem;
-            border-radius: 10px;
-            background-color: var(--color-medium-bg);
-            border: 1px solid var(--color-border-grey);
-            transition: transform 0.3s ease;
-        }
-
-        .step-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .step-item .step-number {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 60px;
-            height: 60px;
-            background-color: var(--color-accent-blue);
-            border-radius: 50%;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--color-dark-bg);
-            margin: -4.5rem auto 1.5rem auto; /* Position above the card */
-            border: 4px solid var(--color-dark-bg);
-        }
-
-        .step-item h3 {
-            font-size: 1.6rem;
-            margin-bottom: 0.8rem;
-        }
-
-        /* Call to Action Section */
-        .cta {
-            background-color: var(--color-accent-purple);
-            padding: 5rem 0;
-            text-align: center;
-            color: var(--color-dark-bg);
-        }
-
-        .cta h2 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            color: var(--color-dark-bg);
+            font-family: 'Lora', serif;
+            font-size: 56px;
+            margin-bottom: 20px;
             line-height: 1.2;
-        }
-
-        .cta p {
-            font-size: 1.4rem;
-            margin-bottom: 2.5rem;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-            color: rgba(26, 32, 44, 0.9); /* Slightly darker text for contrast */
+            animation: fadeInTop 1s ease-out;
         }
 
-        .cta .btn {
-            background-color: var(--color-dark-bg);
-            color: var(--color-accent-purple);
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeIn 1.2s ease-out 0.5s forwards;
         }
 
-        .cta .btn:hover {
-            background-color: var(--color-medium-bg);
-            color: var(--color-accent-blue);
+        .hero .btn {
+            font-size: 18px;
+            padding: 15px 35px;
+            opacity: 0;
+            animation: fadeIn 1.2s ease-out 0.8s forwards;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--bg-accent);
+        }
+
+        h2 {
+            font-family: 'Lora', serif;
+            font-size: 40px;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background-color: var(--accent-gold);
+            border-radius: 2px;
+        }
+
+        .section-description {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-item {
+            background-color: var(--bg-light);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-item img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.1));
+        }
+
+        .feature-item h3 {
+            font-family: 'Lora', serif;
+            font-size: 24px;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        .feature-item p {
+            color: #555;
+            font-size: 16px;
+        }
+
+        /* How It Works */
+        .how-it-works-steps {
+            display: flex;
+            justify-content: space-around;
+            gap: 40px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 30px;
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+        }
+
+        .step .step-number {
+            display: inline-block;
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .step h3 {
+            font-family: 'Lora', serif;
+            font-size: 22px;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .step p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(45deg, var(--secondary-purple) 0%, var(--primary-blue) 100%);
+            color: var(--text-light);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta h2 {
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .cta p {
+            font-size: 22px;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* Footer */
-        .footer {
-            background-color: var(--color-dark-bg);
-            padding: 3rem 0;
-            text-align: center;
-            border-top: 1px solid var(--color-border-grey);
-            font-size: 0.9rem;
-            color: var(--color-hover-grey);
+        footer {
+            background-color: var(--text-dark);
+            color: #BBBBBB;
+            padding: 50px 0;
+            font-size: 14px;
         }
 
-        .footer .container {
+        footer .container {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .footer .logo {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links ul {
-            list-style: none;
-            display: flex;
-            gap: 1.5rem;
             flex-wrap: wrap;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: flex-start;
         }
 
-        .footer-links a {
-            color: var(--color-hover-grey);
-            font-size: 1rem;
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 30px;
         }
 
-        .footer-links a:hover {
-            color: var(--color-light-text);
+        .footer-col.logo-col {
+            flex: 1.5;
         }
 
-        .social-icons {
-            display: flex;
-            gap: 1.5rem;
+        .footer-col .logo {
+            font-size: 30px;
+            color: var(--primary-blue);
+            display: block;
+            margin-bottom: 15px;
         }
 
-        .social-icons a {
-            font-size: 1.5rem;
-            color: var(--color-hover-grey);
+        .footer-col p {
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .footer-col h4 {
+            font-family: 'Lora', serif;
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--accent-gold);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #BBBBBB;
+            text-decoration: none;
             transition: color 0.3s ease;
         }
 
-        .social-icons a:hover {
-            color: var(--color-accent-blue);
+        .footer-col ul li a:hover {
+            color: var(--primary-blue);
         }
 
-        /* Media Queries for Responsiveness */
+        .copyright {
+            width: 100%;
+            text-align: center;
+            border-top: 1px solid #444;
+            padding-top: 30px;
+            margin-top: 20px;
+        }
+
+        /* Animations */
+        @keyframes fadeInTop {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive Design */
         @media (max-width: 992px) {
             .hero h1 {
-                font-size: 3rem;
+                font-size: 48px;
             }
-
             .hero p {
-                font-size: 1.15rem;
+                font-size: 18px;
             }
-
-            .nav ul {
-                gap: 1.5rem;
+            h2 {
+                font-size: 36px;
             }
-
-            .features-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            .how-it-works-steps {
+                flex-direction: column;
+                align-items: center;
             }
-
-            .cta h2 {
-                font-size: 2.5rem;
+            .step {
+                max-width: 80%;
             }
-            .cta p {
-                font-size: 1.2rem;
+            .footer-col {
+                min-width: 45%;
             }
         }
 
         @media (max-width: 768px) {
-            .header .container {
+            header .container {
                 flex-direction: column;
-                gap: 1.5rem;
             }
-
-            .nav ul {
+            nav ul {
+                margin-top: 20px;
                 flex-wrap: wrap;
                 justify-content: center;
-                gap: 1rem;
             }
-
+            nav ul li {
+                margin: 0 15px 10px 15px;
+            }
             .hero {
-                padding: 6rem 0;
+                padding: 80px 0;
             }
-
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 38px;
             }
-
-            .hero .buttons {
+            .hero p {
+                font-size: 16px;
+            }
+            section {
+                padding: 60px 0;
+            }
+            h2 {
+                font-size: 32px;
+            }
+            .section-description {
+                font-size: 16px;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .feature-item {
+                padding: 30px;
+            }
+            .cta h2 {
+                font-size: 30px;
+            }
+            .cta p {
+                font-size: 18px;
+            }
+            footer .container {
                 flex-direction: column;
-                gap: 1rem;
                 align-items: center;
             }
-
-            .features h2, .how-it-works h2, .cta h2 {
-                font-size: 2rem;
+            .footer-col {
+                text-align: center;
+                margin-bottom: 40px;
             }
-
-            .step-item {
-                max-width: 100%;
-            }
-
-            .footer .container {
-                gap: 1rem;
-            }
-
-            .footer-links ul {
-                flex-direction: column;
-                gap: 0.8rem;
+            .footer-col h4::after {
+                left: 50%;
+                transform: translateX(-50%);
             }
         }
 
         @media (max-width: 480px) {
             .logo {
-                font-size: 1.5rem;
+                font-size: 24px;
             }
-
-            .nav a {
-                font-size: 0.95rem;
+            nav ul li {
+                margin: 0 10px 10px 10px;
             }
-
             .hero h1 {
-                font-size: 2rem;
+                font-size: 30px;
             }
-
-            .hero p {
-                font-size: 1rem;
+            .hero .btn {
+                padding: 12px 25px;
+                font-size: 16px;
             }
-
-            .btn {
-                padding: 0.7rem 1.5rem;
-                font-size: 0.9rem;
+            h2 {
+                font-size: 28px;
             }
-
-            .features-grid {
-                grid-template-columns: 1fr;
+            .step {
+                min-width: unset;
+                max-width: 95%;
             }
-
-            .step-item .step-number {
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
-                margin-top: -3.5rem;
-            }
-
             .cta h2 {
-                font-size: 1.8rem;
+                font-size: 26px;
             }
-
             .cta p {
-                font-size: 1rem;
-            }
-
-            .footer-links ul {
-                font-size: 0.85rem;
+                font-size: 16px;
             }
         }
     </style>
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoIF2q0sM2P1G8Jc3QW2Yw9mQ+A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <header class="header">
+    <header>
         <div class="container">
-            <a href="#" class="logo">KLING <span>AI</span></a>
-            <nav class="nav">
+            <a href="#" class="logo">KLING AI</a>
+            <nav>
                 <ul>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#how-it-works">How It Works</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#features">Tính năng</a></li>
+                    <li><a href="#how-it-works">Cách hoạt động</a></li>
+                    <li><a href="#cta">Bắt đầu</a></li>
+                    <li><a href="#">Đăng nhập</a></li>
                 </ul>
             </nav>
-            <a href="#cta" class="btn">Get Started</a>
         </div>
     </header>
 
     <section class="hero">
         <div class="container">
-            <h1>Craft Your Perfect Lofi Soundtrack with KLING AI</h1>
-            <p>Unleash your creativity and generate unique, chill Lofi music effortlessly. From study beats to rainy day vibes, KLING AI has you covered.</p>
-            <div class="buttons">
-                <a href="#cta" class="btn">Start Generating Now</a>
-                <a href="#how-it-works" class="btn btn-outline">Learn More</a>
-            </div>
+            <h1>KLING AI: Tạo Video Loop Hoàn Hảo cho Playlist Deep Focus Lofi 2026</h1>
+            <p>Biến những ý tưởng hình ảnh về không gian học tập và làm việc lofi của bạn thành các video loop liền mạch, chất lượng cao chỉ trong vài giây. Nâng tầm trải nghiệm tập trung với KLING AI!</p>
+            <a href="#cta" class="btn btn-secondary">Bắt đầu tạo loop của bạn</a>
         </div>
     </section>
 
-    <section id="features" class="features">
+    <section id="features">
         <div class="container">
-            <h2>Why Choose KLING AI for Lofi?</h2>
+            <h2>Tại sao KLING AI là lựa chọn số 1 của bạn?</h2>
+            <p class="section-description">Chúng tôi giúp bạn dễ dàng tạo ra nội dung hình ảnh sống động, khớp với nhịp điệu thư giãn của playlist lofi, thúc đẩy sự tập trung tối đa.</p>
+
             <div class="features-grid">
                 <div class="feature-item">
-                    <span class="icon"><i class="fas fa-robot"></i></span>
-                    <h3>AI-Powered Generation</h3>
-                    <p>Harness advanced AI algorithms to create endless variations of high-quality Lofi tracks tailored to your desires.</p>
+                    <img src="https://img.icons8.com/ios-filled/60/5D7DD4/automatic.png" alt="Tạo tự động">
+                    <h3>Tạo Video Tự Động bằng AI</h3>
+                    <p>Chỉ cần mô tả ý tưởng của bạn, KLING AI sẽ biến nó thành video loop độc đáo, phù hợp với phong cách lofi.</p>
                 </div>
                 <div class="feature-item">
-                    <span class="icon"><i class="fas fa-sliders-h"></i></span>
-                    <h3>Customizable Moods</h3>
-                    <p>Control the atmosphere. Adjust tempo, key, instrumentation, and mood to get the exact chill you're looking for.</p>
+                    <img src="https://img.icons8.com/ios-filled/60/5D7DD4/infinity.png" alt="Loop liền mạch">
+                    <h3>Loop Liền Mạch & Chất Lượng Cao</h3>
+                    <p>Đảm bảo video loop của bạn chạy mượt mà không gián đoạn, mang đến trải nghiệm hình ảnh thư giãn tuyệt đối.</p>
                 </div>
                 <div class="feature-item">
-                    <span class="icon"><i class="fas fa-infinity"></i></span>
-                    <h3>Endless Inspiration</h3>
-                    <p>Never hit a creative block again. Generate fresh ideas or complete tracks with just a few clicks.</p>
+                    <img src="https://img.icons8.com/ios-filled/60/5D7DD4/paint-palette.png" alt="Tùy chỉnh phong cách">
+                    <h3>Tùy Chỉnh Phong Cách & Tâm Trạng</h3>
+                    <p>Kiểm soát màu sắc, chủ đề, và chi tiết để video loop phản ánh đúng tinh thần "Deep Focus Lofi" bạn mong muốn.</p>
                 </div>
                 <div class="feature-item">
-                    <span class="icon"><i class="fas fa-headphones"></i></span>
-                    <h3>Royalty-Free & Ready</h3>
-                    <p>All generated music is royalty-free, perfect for content creators, streamers, or just personal enjoyment.</p>
-                </div>
-                <div class="feature-item">
-                    <span class="icon"><i class="fas fa-palette"></i></span>
-                    <h3>Intuitive Interface</h3>
-                    <p>A beautifully designed, easy-to-use platform means you spend less time learning and more time creating.</p>
-                </div>
-                <div class="feature-item">
-                    <span class="icon"><i class="fas fa-download"></i></span>
-                    <h3>High-Quality Export</h3>
-                    <p>Download your creations in various high-fidelity formats, ready for any project or playlist.</p>
+                    <img src="https://img.icons8.com/ios-filled/60/5D7DD4/time-machine.png" alt="Tiết kiệm thời gian">
+                    <h3>Tiết Kiệm Thời Gian Vô Giá</h3>
+                    <p>Không cần kỹ năng đồ họa phức tạp. KLING AI giúp bạn tạo ra nội dung chuyên nghiệp trong tích tắc.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="how-it-works" class="how-it-works">
+    <section id="how-it-works">
         <div class="container">
-            <h2>Your Lofi Journey in 3 Simple Steps</h2>
-            <div class="steps-grid">
-                <div class="step-item">
+            <h2>KLING AI hoạt động như thế nào?</h2>
+            <p class="section-description">Quy trình đơn giản gồm 3 bước để bạn sở hữu ngay các video loop tuyệt đẹp.</p>
+
+            <div class="how-it-works-steps">
+                <div class="step">
                     <div class="step-number">1</div>
-                    <h3>Describe Your Vibe</h3>
-                    <p>Tell KLING AI what kind of Lofi track you envision – calm, rainy, jazzy, or upbeat. Use keywords or select presets.</p>
+                    <h3>Mô tả ý tưởng của bạn</h3>
+                    <p>Nhập văn bản mô tả về khung cảnh lofi bạn muốn (ví dụ: "cô gái học bài cạnh cửa sổ trời mưa, tông màu ấm").</p>
                 </div>
-                <div class="step-item">
+                <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Generate & Refine</h3>
-                    <p>Our AI swiftly crafts a unique track. Listen, make adjustments, and let the AI fine-tune to perfection.</p>
+                    <h3>AI tạo & tinh chỉnh</h3>
+                    <p>Hệ thống AI của chúng tôi sẽ phân tích và tạo ra các video loop theo mô tả. Bạn có thể điều chỉnh thêm.</p>
                 </div>
-                <div class="step-item">
+                <div class="step">
                     <div class="step-number">3</div>
-                    <h3>Download & Enjoy</h3>
-                    <p>Once satisfied, download your custom, royalty-free Lofi masterpiece and integrate it into your world.</p>
+                    <h3>Sử dụng cho playlist</h3>
+                    <p>Tải xuống video loop và tích hợp ngay vào playlist "Deep Focus Lofi 2026" của bạn trên YouTube hoặc nền tảng khác.</p>
                 </div>
             </div>
         </div>
@@ -593,30 +598,39 @@
 
     <section id="cta" class="cta">
         <div class="container">
-            <h2>Ready to Elevate Your Lofi Experience?</h2>
-            <p>Join the growing community of creators and listeners who are shaping the future of Lofi music with KLING AI.</p>
-            <a href="#" class="btn">Generate My First Track</a>
+            <h2>Bạn đã sẵn sàng nâng tầm playlist lofi của mình?</h2>
+            <p>Tham gia cộng đồng những nhà sáng tạo đang sử dụng KLING AI để tạo ra không gian tập trung hiệu quả nhất.</p>
+            <a href="#" class="btn btn-secondary">Đăng ký ngay & Khám phá</a>
         </div>
     </section>
 
-    <footer class="footer">
+    <footer>
         <div class="container">
-            <a href="#" class="logo">KLING <span>AI</span></a>
-            <div class="footer-links">
+            <div class="footer-col logo-col">
+                <a href="#" class="logo">KLING AI</a>
+                <p>Giải pháp AI tiên phong cho nội dung video loop lofi, giúp bạn tạo ra không gian tập trung và thư giãn hoàn hảo.</p>
+                <p>Copyright &copy; 2023 KLING AI. All rights reserved.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Liên kết nhanh</h4>
                 <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Support</a></li>
+                    <li><a href="#features">Tính năng</a></li>
+                    <li><a href="#how-it-works">Cách hoạt động</a></li>
+                    <li><a href="#">Điều khoản dịch vụ</a></li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
                 </ul>
             </div>
-            <div class="social-icons">
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+            <div class="footer-col">
+                <h4>Hỗ trợ</h4>
+                <ul>
+                    <li><a href="#">Câu hỏi thường gặp</a></li>
+                    <li><a href="#">Liên hệ chúng tôi</a></li>
+                    <li><a href="#">Hướng dẫn sử dụng</a></li>
+                </ul>
             </div>
-            <p>&copy; 2023 KLING AI. All rights reserved.</p>
+        </div>
+        <div class="copyright">
+            KLING AI - Made for creators.
         </div>
     </footer>
 </body>
