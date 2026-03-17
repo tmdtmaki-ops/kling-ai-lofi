@@ -1,10 +1,11 @@
-name: AI Affiliate Auto-Pilot 2026 Perfect-Fix
+name: AI Affiliate Auto-Pilot 2026 Perfect-Build
 
 on:
   workflow_dispatch: 
 
+# ĐẶT BIẾN Ở ĐÂY: Cấp độ toàn cầu để ép toàn bộ runner dùng Node 24
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
 jobs:
   build:
@@ -38,9 +39,13 @@ jobs:
               api_key = os.environ.get('GEMINI_API_KEY')
               client = genai.Client(api_key=api_key)
               
+              # Dùng model mạnh nhất trong danh sách khả dụng của bạn
               model_id = 'gemini-2.5-flash' 
               
-              task = "Viết mã HTML/CSS Landing Page chuyên nghiệp cho KLING AI ngách nhạc Lofi. CHỈ trả về code, KHÔNG giải thích, KHÔNG dùng dấu ```."
+              # Gắn ngữ cảnh playlist nhạc của bạn vào để AI viết nội dung chuẩn hơn
+              task = """Viết mã HTML/CSS Landing Page chuyên nghiệp cho công cụ KLING AI. 
+              Mục tiêu: Dành cho những người muốn tạo video loop cho playlist 'Deep Focus Lofi 2026 - Nhạc Tập Trung Học Tập & Làm Việc'. 
+              Yêu cầu: CHỈ trả về code HTML, KHÔNG giải thích, KHÔNG dùng dấu ```."""
 
               print(f"🚀 Triển khai thiết kế với: {model_id}...")
               
@@ -51,14 +56,12 @@ jobs:
               
               if response.text:
                   raw_content = response.text.strip()
-                  
-                  # Kỹ thuật xóa Markdown an toàn: 
-                  # Chỉ xóa các dòng có chứa ```html hoặc ``` mà không đụng vào nội dung bên trong
+                  # Xóa Markdown an toàn để không hỏng thẻ <html>
                   clean_content = re.sub(r'^```html\s*|^```\s*|```\s*$', '', raw_content, flags=re.MULTILINE)
                   
                   with open('index.html', 'w', encoding='utf-8') as f:
                       f.write(clean_content.strip())
-                  print("✅ Fix lỗi hiển thị thành công!")
+                  print("✅ Build hoàn tất!")
               else:
                   sys.exit(1)
 
@@ -75,6 +78,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes."
           else
-            git commit -m "Fix bug: Aggressive HTML replacement"
+            git commit -m "Clean Build: Node 24 compliant"
             git push
           fi
