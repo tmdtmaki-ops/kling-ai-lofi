@@ -1,10 +1,10 @@
-name: AI Affiliate Auto-Pilot 2026 Ultimate
+name: AI Affiliate Auto-Pilot 2026 Perfect-Fix
 
 on:
   workflow_dispatch: 
 
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
 jobs:
   build:
@@ -32,18 +32,17 @@ jobs:
           import os
           from google import genai
           import sys
+          import re
 
           try:
               api_key = os.environ.get('GEMINI_API_KEY')
               client = genai.Client(api_key=api_key)
               
-              # Sử dụng model ID chính xác từ danh sách khả dụng của bạn
-              # Chúng ta ưu tiên 2.5-flash vì nó ổn định và hiện đại
               model_id = 'gemini-2.5-flash' 
               
-              task = "Viết mã HTML/CSS Landing Page chuyên nghiệp cho KLING AI ngách nhạc Lofi. CHỈ trả về code, KHÔNG giải thích."
+              task = "Viết mã HTML/CSS Landing Page chuyên nghiệp cho KLING AI ngách nhạc Lofi. CHỈ trả về code, KHÔNG giải thích, KHÔNG dùng dấu ```."
 
-              print(f"🚀 Đang triệu hồi sức mạnh từ: {model_id}...")
+              print(f"🚀 Triển khai thiết kế với: {model_id}...")
               
               response = client.models.generate_content(
                   model=model_id,
@@ -51,20 +50,20 @@ jobs:
               )
               
               if response.text:
-                  content = response.text.strip()
-                  # Làm sạch mã HTML khỏi các ký tự Markdown
-                  if content.startswith("```"):
-                      content = "\n".join(content.split("\n")[1:-1]).replace("html", "")
+                  raw_content = response.text.strip()
+                  
+                  # Kỹ thuật xóa Markdown an toàn: 
+                  # Chỉ xóa các dòng có chứa ```html hoặc ``` mà không đụng vào nội dung bên trong
+                  clean_content = re.sub(r'^```html\s*|^```\s*|```\s*$', '', raw_content, flags=re.MULTILINE)
                   
                   with open('index.html', 'w', encoding='utf-8') as f:
-                      f.write(content)
-                  print(f"✅ Thành công! Website đã được nâng cấp bởi {model_id}.")
+                      f.write(clean_content.strip())
+                  print("✅ Fix lỗi hiển thị thành công!")
               else:
-                  print("❌ Lỗi: Gemini trả về kết quả rỗng.")
                   sys.exit(1)
 
           except Exception as e:
-              print(f"❌ Lỗi hệ thống: {e}")
+              print(f"❌ Lỗi: {e}")
               sys.exit(1)
           EOF
 
@@ -74,8 +73,8 @@ jobs:
           git config --global user.email "bot@google.ai"
           git add index.html
           if git diff --staged --quiet; then
-            echo "Không có thay đổi để cập nhật."
+            echo "No changes."
           else
-            git commit -m "AI Auto-Pilot: Deploying via Gemini 2.5 Flash"
+            git commit -m "Fix bug: Aggressive HTML replacement"
             git push
           fi
