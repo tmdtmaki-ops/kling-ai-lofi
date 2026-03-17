@@ -1,265 +1,377 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KLING AI - Deep Focus Lofi 2026</title>
-    <!-- Google Fonts: Inter for modern, highly readable UI -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>KLING AI: Deep Focus Lofi 2026 - Tập Trung Sâu Lắng</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables for easy theme management */
         :root {
-            --dark-bg: #0a0a1a; /* Very dark blue-black for a deep, futuristic feel */
-            --glass-bg: rgba(255, 255, 255, 0.05); /* Subtle white for glass effect */
-            --glass-border: rgba(255, 255, 255, 0.1); /* Light border for definition */
-            --text-light: #e0e0e0; /* Off-white for readability */
-            --text-accent: #8e44ad; /* A rich purple for AI/tech accent */
-            --cta-bg: #8e44ad; /* Primary CTA button color */
-            --cta-bg-hover: #9b59b6; /* Slightly lighter purple for hover */
-            --font-inter: 'Inter', sans-serif;
-            --border-radius-lg: 18px; /* Large radius for main card */
-            --border-radius-md: 10px; /* Medium radius for buttons */
-            --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Strong shadow for depth with glass */
+            --bg-start: #2c3e50; /* Dark slate blue */
+            --bg-end: #4a6c6c;   /* Muted dark teal */
+            --text-primary: #e0e0e0; /* Light off-white */
+            --text-secondary: #c9d6de; /* Softer light blue-grey */
+            --accent-color: #8da3a3; /* Muted teal-grey for highlights */
+            --button-bg: #6b8e8b; /* Soft forest green */
+            --button-text: #2c3e50; /* Dark text for button */
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-light: rgba(0, 0, 0, 0.2);
+
+            --font-heading: 'Lora', serif;
+            --font-body: 'Inter', sans-serif;
         }
 
-        /* Base Styles - Dark Mode */
         body {
-            font-family: var(--font-inter);
-            background-color: var(--dark-bg);
-            color: var(--text-light);
+            font-family: var(--font-body);
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
             margin: 0;
             padding: 0;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            line-height: 1.6;
-            overflow-x: hidden; /* Prevent horizontal scroll from background elements */
-            position: relative; /* For background animated circles */
         }
 
-        /* Animated Background Gradients - Adds depth and modern flair */
-        body::before, body::after {
-            content: '';
-            position: absolute;
-            border-radius: 50%; /* Make them circles */
-            background: linear-gradient(45deg, rgba(142, 68, 173, 0.3), rgba(52, 152, 219, 0.3)); /* Purple to blue gradient */
-            filter: blur(80px); /* Soft, glowing effect */
-            z-index: -1; /* Keep them behind the content */
-            animation: moveCircles 18s infinite alternate ease-in-out; /* Slow, smooth animation */
-        }
-
-        body::before {
-            width: 350px;
-            height: 350px;
-            top: -120px;
-            left: -120px;
-            animation-delay: 0s;
-        }
-
-        body::after {
-            width: 450px;
-            height: 450px;
-            bottom: -180px;
-            right: -180px;
-            background: linear-gradient(135deg, rgba(231, 76, 60, 0.3), rgba(241, 196, 15, 0.3)); /* Red to yellow gradient */
-            animation-delay: 9s; /* Stagger the animation */
-        }
-
-        @keyframes moveCircles {
-            0% { transform: translate(0, 0) scale(1); opacity: 0.7; }
-            50% { transform: translate(70px, -70px) scale(1.1); opacity: 0.9; }
-            100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
-        }
-
-        /* Main Content Container - Glassmorphism Effect */
         .container {
-            max-width: 900px;
-            padding: 40px;
-            text-align: center;
-            /* Glassmorphism styles */
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px); /* The core glass effect */
-            -webkit-backdrop-filter: blur(10px); /* Safari support */
-            border: 1px solid var(--glass-border); /* Subtle border for definition */
-            box-shadow: var(--shadow-glass); /* Adds depth and dimension */
-            border-radius: var(--border-radius-lg);
-            margin: 20px; /* Spacing from viewport edges */
-            position: relative; /* Ensure it stays above background circles */
-            z-index: 10;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        /* Header (Logo) */
         header {
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--glass-border); /* Separator with glass effect */
+            background-color: rgba(var(--bg-start-rgb, 44, 62, 80), 0.8);
+            backdrop-filter: blur(5px);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .logo {
-            font-size: 2.5em;
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
             font-weight: 700;
-            color: var(--text-light);
+            color: var(--accent-color);
             text-decoration: none;
-            display: inline-block;
-            letter-spacing: 1px;
-            /* Gradient for a techy, premium feel */
-            background: linear-gradient(45deg, #e0e0e0, var(--text-accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 8px rgba(142, 68, 173, 0.3); /* Subtle glow */
+            text-shadow: 0 0 5px var(--shadow-light);
         }
 
-        /* Hero Section - Content Focus */
-        .hero-section h1 {
-            font-size: 3.8em; /* Large, impactful title */
-            font-weight: 700;
-            margin-bottom: 15px;
-            line-height: 1.1;
-            color: var(--text-accent); /* Main title in accent color */
-            text-shadow: 0 0 15px rgba(142, 68, 173, 0.6); /* Prominent glow */
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
         }
 
-        .hero-section h2 {
-            font-size: 1.9em;
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--text-secondary);
+            text-decoration: none;
             font-weight: 400;
-            margin-bottom: 25px;
-            color: var(--text-light);
-            opacity: 0.85; /* Slightly less prominent than main title */
+            transition: color 0.3s ease, transform 0.2s ease;
         }
 
-        .hero-section p {
-            font-size: 1.2em;
-            max-width: 700px; /* Constrain line length for readability */
-            margin: 0 auto 40px auto;
-            color: var(--text-light);
-            opacity: 0.9;
+        nav ul li a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
         }
 
-        /* Call to Action Button */
-        .cta-button {
-            display: inline-block;
-            background-color: var(--cta-bg);
-            color: #ffffff;
-            font-size: 1.4em; /* Prominent text size */
-            font-weight: 600;
-            padding: 20px 45px;
-            border-radius: var(--border-radius-md);
-            text-decoration: none;
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Smooth transitions */
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4); /* Initial shadow */
-            border: none;
-            cursor: pointer;
-            letter-spacing: 0.8px;
-            text-transform: uppercase; /* Stronger call to action */
-        }
-
-        .cta-button:hover {
-            background-color: var(--cta-bg-hover);
-            transform: translateY(-5px) scale(1.03); /* Lift and slightly enlarge */
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5); /* More pronounced shadow on hover */
-        }
-
-        /* Footer */
-        footer {
-            margin-top: 50px;
-            padding-top: 25px;
-            border-top: 1px solid var(--glass-border);
-            font-size: 0.9em;
-            color: var(--text-light);
-            opacity: 0.6;
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            width: 100%;
-            z-index: 10; /* Ensure footer is above background elements */
+            min-height: calc(100vh - 80px); /* Adjust based on header height */
+            padding: 40px 0;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Responsive Adjustments for Mobile and Tablet */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMCAwdjY0aDY0VjBIMHptNC4yNjEgNC4yNjJoNTUuNDc4VjU5LjczOEg0LjI2MVY0LjI2MXptMTkuODI4IDE5LjgyOGgxOS44Mjh2MTkuODI4SDI0LjA4OXYtMTkuODI4eiIgZmlsbD0iIzQwNTA1OSIgb3BhY2l0eT0iMC4xIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=') repeat;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: 3.8rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+            line-height: 1.1;
+            text-shadow: 0 4px 8px var(--shadow-light);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px var(--shadow-light);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .section {
+            padding: 80px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section:nth-of-type(odd) {
+            background-color: rgba(var(--bg-start-rgb, 44, 62, 80), 0.1); /* Subtle dark overlay */
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            color: var(--accent-color);
+            text-align: center;
+            margin-bottom: 50px;
+            text-shadow: 0 2px 4px var(--shadow-light);
+        }
+
+        h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background-color: rgba(var(--bg-end-rgb, 74, 108, 108), 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(3px);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .card i {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+            background-color: rgba(var(--bg-end-rgb, 74, 108, 108), 0.2);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .cta-section h2 {
+            margin-bottom: 30px;
+            color: var(--text-primary);
+        }
+
+        footer {
+            background-color: rgba(var(--bg-start-rgb, 44, 62, 80), 0.8);
+            backdrop-filter: blur(5px);
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: auto; /* Pushes footer to the bottom */
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .container {
-                padding: 30px;
-                margin: 15px;
+            nav ul {
+                display: none; /* Hide nav on small screens, could add a hamburger menu */
             }
 
             .logo {
-                font-size: 2em;
+                font-size: 1.5rem;
             }
 
-            .hero-section h1 {
-                font-size: 3em;
+            .hero h1 {
+                font-size: 2.8rem;
             }
 
-            .hero-section h2 {
-                font-size: 1.6em;
+            .hero p {
+                font-size: 1.1rem;
             }
 
-            .hero-section p {
-                font-size: 1.05em;
-                margin-bottom: 30px;
+            h2 {
+                font-size: 2.2rem;
             }
 
-            .cta-button {
-                font-size: 1.2em;
-                padding: 16px 35px;
+            h3 {
+                font-size: 1.5rem;
             }
 
-            body::before, body::after {
-                filter: blur(60px); /* Less blur on smaller screens */
-                width: 250px;
-                height: 250px;
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .grid-3 {
+                grid-template-columns: 1fr;
             }
         }
 
         @media (max-width: 480px) {
-            .container {
-                padding: 20px;
-                border-radius: var(--border-radius-md); /* Slightly less rounded */
+            .hero h1 {
+                font-size: 2.2rem;
             }
-            .logo {
-                font-size: 1.8em;
+
+            .hero p {
+                font-size: 1rem;
             }
-            .hero-section h1 {
-                font-size: 2.5em;
+
+            h2 {
+                font-size: 1.8rem;
             }
-            .hero-section h2 {
-                font-size: 1.3em;
-            }
-            .hero-section p {
-                font-size: 0.95em;
-                margin-bottom: 25px;
-            }
-            .cta-button {
-                font-size: 1em;
-                padding: 14px 28px;
-            }
-            body::before, body::after {
-                filter: blur(40px); /* Even less blur */
-                width: 180px;
-                height: 180px;
+
+            .section {
+                padding: 60px 0;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <a href="#" class="logo">KLING AI</a>
-        </header>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">KLING AI</a>
+                <ul>
+                    <li><a href="#gioi-thieu">Giới thiệu</a></li>
+                    <li><a href="#tai-sao-chon">Tại sao chọn?</a></li>
+                    <li><a href="#nghe-ngay">Nghe ngay</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-        <main class="hero-section">
-            <h1>Deep Focus Lofi 2026</h1>
-            <h2>Unlocking Peak Productivity with KLING AI</h2>
-            <p>
-                Immerse yourself in the ultimate sonic environment designed to elevate your concentration. 
-                KLING AI's adaptive soundscapes blend seamless lo-fi beats with intelligent algorithms, 
-                creating a unique, personalized flow state. Tune out distractions, tune into your best self.
-            </p>
-            <a href="#" class="cta-button">Start Your Focus Journey</a>
-        </main>
-    </div>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>KLING AI Giới Thiệu: <br>Deep Focus Lofi 2026</h1>
+                <p>Đắm chìm vào sự tập trung đỉnh cao và thư giãn với playlist Lofi được AI sáng tạo, mang đến âm thanh hoàn hảo cho công việc, học tập và thiền định.</p>
+                <a href="#nghe-ngay" class="btn">Khám phá ngay</a>
+            </div>
+        </section>
+
+        <section id="gioi-thieu" class="section">
+            <div class="container">
+                <h2>Bản Giao Hưởng Của Sự Bình Yên và Hiệu Quả</h2>
+                <div class="grid-3">
+                    <div class="card">
+                        <h3>Sức Mạnh Của AI</h3>
+                        <p>KLING AI sử dụng công nghệ tiên tiến để tuyển chọn và tạo ra những giai điệu lofi độc đáo, đảm bảo dòng chảy âm thanh liên tục và hài hòa.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Tập Trung Sâu Lắng</h3>
+                        <p>Mỗi bản nhạc trong 'Deep Focus Lofi 2026' được thiết kế để loại bỏ phiền nhiễu, giúp bạn dễ dàng đạt được trạng thái tập trung cao độ.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Thư Giãn Tuyệt Đối</h3>
+                        <p>Không chỉ tăng cường hiệu suất, playlist còn là liều thuốc cho tâm hồn, mang lại cảm giác bình yên và giảm căng thẳng sau một ngày dài.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tai-sao-chon" class="section">
+            <div class="container">
+                <h2>Tại Sao 'Deep Focus Lofi 2026' Là Lựa Chọn Hoàn Hảo Của Bạn?</h2>
+                <div class="grid-3">
+                    <div class="card">
+                        <h3>Phù Hợp Mọi Hoạt Động</h3>
+                        <p>Dù bạn đang làm việc, học bài, đọc sách hay chỉ đơn giản là cần một không gian yên tĩnh, playlist này đều là người bạn đồng hành lý tưởng.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Cập Nhật Liên Tục</h3>
+                        <p>KLING AI không ngừng học hỏi và cải tiến, mang đến những bản nhạc lofi mới mẻ, phù hợp với xu hướng và sở thích của người dùng.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Không Gian Âm Thanh Độc Đáo</h3>
+                        <p>Trải nghiệm sự kết hợp tinh tế giữa âm thanh ambient, nhịp điệu nhẹ nhàng và những chi tiết bất ngờ, tạo nên một bản sắc riêng cho KLING AI.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="nghe-ngay" class="cta-section">
+            <div class="container">
+                <h2>Sẵn Sàng Đắm Chìm Trong Deep Focus Lofi 2026?</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 40px; color: var(--text-secondary);">Bắt đầu hành trình của sự tập trung và thư thái ngay hôm nay.</p>
+                <a href="#" class="btn">Nghe Ngay Playlist</a> <!-- Placeholder for actual playlist link -->
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <p>&copy; 2024 KLING AI. All rights reserved.</p>
+        <div class="container">
+            <p>&copy; 2026 KLING AI. Tất cả các quyền được bảo lưu.</p>
+            <p>Sáng tạo bởi trí tuệ nhân tạo, phục vụ sự bình yên của bạn.</p>
+        </div>
     </footer>
 </body>
 </html>
