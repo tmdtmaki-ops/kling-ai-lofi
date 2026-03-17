@@ -1,4 +1,4 @@
-name: AI Affiliate Auto-Pilot 2026 Golden-Fix
+name: AI Affiliate Auto-Pilot 2026 UI-Master
 
 on:
   workflow_dispatch: 
@@ -23,7 +23,7 @@ jobs:
       - name: Install Modern Gemini SDK
         run: pip install -q google-genai
 
-      - name: Run AI Agent 2026
+      - name: Run AI Agent UI-Designer
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
@@ -39,11 +39,16 @@ jobs:
               
               model_id = 'gemini-2.5-flash' 
               
-              task = """Viết mã HTML/CSS Landing Page chuyên nghiệp cho KLING AI. 
-              Gắn liền với playlist 'Deep Focus Lofi 2026'. 
-              Yêu cầu trả về đầy đủ các thẻ: <!DOCTYPE html>, <html>, <head>, <body>."""
+              # Câu lệnh (Prompt) được thiết kế lại để ép AI viết CSS chuyên nghiệp
+              task = """Hãy đóng vai một chuyên gia UI/UX. Viết mã HTML cho Landing Page KLING AI.
+              YÊU CẦU BẮT BUỘC:
+              1. Phải có thẻ <style> bên trong <head> với CSS hiện đại (Glassmorphism, Dark mode).
+              2. Sử dụng font chữ Google Fonts (như Inter hoặc Montserrat).
+              3. Nội dung tập trung vào playlist 'Deep Focus Lofi 2026'.
+              4. Phải có nút bấm (CTA) đẹp mắt, có hiệu ứng hover.
+              5. Trả về DUY NHẤT một khối mã bắt đầu từ <!DOCTYPE html>."""
 
-              print(f"🚀 Triển khai thiết kế với: {model_id}...")
+              print(f"🚀 Đang thiết kế giao diện cao cấp với: {model_id}...")
               
               response = client.models.generate_content(
                   model=model_id,
@@ -53,19 +58,15 @@ jobs:
               if response.text:
                   raw_content = response.text.strip()
                   
-                  # KỸ THUẬT VÀNG: Chỉ lấy nội dung nằm giữa <!DOCTYPE html> và </html>
-                  # Điều này giúp loại bỏ hoàn toàn các ký tự lạ hoặc code block bên ngoài
-                  match = re.search(r'(<!DOCTYPE html>.*?</html>)', raw_content, re.DOTALL | re.IGNORECASE)
-                  
-                  if match:
-                      final_html = match.group(1)
+                  # Kỹ thuật trích xuất linh hoạt hơn
+                  if "<!DOCTYPE html>" in raw_content:
+                      final_html = raw_content[raw_content.find("<!DOCTYPE html>"):raw_content.rfind("</html>")+7]
                   else:
-                      # Nếu không tìm thấy thẻ chuẩn, dùng biện pháp làm sạch dự phòng
-                      final_html = re.sub(r'^```html\s*|^```\s*|```\s*$', '', raw_content, flags=re.MULTILINE)
+                      final_html = raw_content.replace('```html', '').replace('```', '').strip()
                   
                   with open('index.html', 'w', encoding='utf-8') as f:
-                      f.write(final_html.strip())
-                  print("✅ Đã trích xuất HTML sạch thành công!")
+                      f.write(final_html)
+                  print("✅ Đã xuất bản trang web đầy đủ CSS!")
               else:
                   sys.exit(1)
 
@@ -82,6 +83,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes."
           else
-            git commit -m "Golden Fix: Pure HTML Extraction"
+            git commit -m "UI Upgrade: Full CSS and Modern Design"
             git push
           fi
