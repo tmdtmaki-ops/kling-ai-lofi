@@ -1,0 +1,58 @@
+name: AI Affiliate Auto-Pilot
+
+on:
+  workflow_dispatch: # Cho phép bạn bấm nút chạy bằng tay để kiểm tra
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Dependencies
+        run: pip install google-generativeai requests
+
+      - name: Run AI Agent
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python - <<EOF
+          import os
+          import google.generativeai as genai
+          import requests
+
+          # Cấu hình Gemini
+          genai.configure(api_key=os.environ['GEMINI_API_KEY'])
+          model = genai.GenerativeModel('gemini-1.5-flash')
+
+          # Bước 1: Giả lập kỹ năng S1 - Lấy dữ liệu từ Affitor (Ví dụ top 3 AI Video)
+          # Lưu ý: Ở bản nâng cao chúng ta sẽ dùng API thật, đây là bản mẫu tự động
+          prompt = """Bạn là chuyên gia từ Affiliate Skills. 
+          Nhiệm vụ: 
+          1. Tìm sản phẩm AI Video hot nhất hiện nay (ưu tiên Kling AI hoặc HeyGen). 
+          2. Viết lại TOÀN BỘ file index.html cho một Landing Page chuẩn SEO, hiện đại.
+          3. Nội dung tập trung vào ngách 'Nhạc Lofi 2026'.
+          4. Chỉ trả về mã HTML, không giải thích gì thêm."""
+
+          response = model.generate_content(prompt)
+          
+          # Lưu kết quả vào file index.html
+          with open('index.html', 'w', encoding='utf-8') as f:
+              f.write(response.text.replace('```html', '').replace('```', ''))
+          EOF
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "Gemini-AI-Bot"
+          git config --global user.email "bot@google.ai"
+          git add index.html
+          git commit -m "AI tự động cập nhật Landing Page mới nhất" || echo "Không có thay đổi"
+          git push
