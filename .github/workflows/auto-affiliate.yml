@@ -1,4 +1,4 @@
-name: AI Affiliate Auto-Pilot 2026 Resilient
+name: AI Affiliate Auto-Pilot Pro-Edition
 
 on:
   workflow_dispatch: 
@@ -24,51 +24,47 @@ jobs:
       - name: Install Modern Gemini SDK
         run: pip install -q google-genai
 
-      - name: Run AI Agent with Retry Logic
+      - name: Run AI Agent Pro
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           python - <<'EOF'
           import os
-          import time
           from google import genai
           import sys
+          import time
 
-          def run_task():
+          try:
               api_key = os.environ.get('GEMINI_API_KEY')
               client = genai.Client(api_key=api_key)
               
-              # Danh sách các model để thử (nếu cái này hết quota thì thử cái kia)
-              models_to_try = ['gemini-2.0-flash', 'gemini-1.5-flash']
+              # Dùng Gemini 1.5 Pro - Thông minh hơn, phù hợp với tài khoản Pro của bạn
+              # Nếu 1.5 Pro bận, nó sẽ tự động thử lại sau 30s
+              model_name = 'gemini-1.5-pro'
               
-              task = "Viết mã HTML/CSS Landing Page cho KLING AI ngách nhạc Lofi. Chỉ trả về code HTML, không giải thích."
+              task = "Viết mã HTML/CSS Landing Page chuyên nghiệp cho KLING AI ngách nhạc Lofi. CHỈ trả về code, KHÔNG giải thích."
 
-              for model_name in models_to_try:
-                  for attempt in range(3): # Thử lại tối đa 3 lần cho mỗi model
-                      try:
-                          print(f"🚀 Đang thử dùng model: {model_name} (Lần thử {attempt + 1})...")
-                          response = client.models.generate_content(
-                              model=model_name,
-                              contents=task
-                          )
-                          
-                          if response.text:
-                              clean_html = response.text.replace('```html', '').replace('```', '').strip()
-                              with open('index.html', 'w', encoding='utf-8') as f:
-                                  f.write(clean_html)
-                              print(f"✅ Thành công với model: {model_name}")
-                              return True
-                      except Exception as e:
-                          if "429" in str(e):
-                              print(f"⚠️ Hết hạn mức cho {model_name}. Đang đợi 30s...")
-                              time.sleep(30)
-                          else:
-                              print(f"❌ Lỗi khác: {e}")
-                              break # Chuyển sang model tiếp theo
-              return False
+              print(f"🚀 Khởi động Gemini Pro để xây dựng Landing Page...")
+              
+              response = client.models.generate_content(
+                  model=model_name,
+                  contents=task
+              )
+              
+              if response and response.text:
+                  clean_html = response.text.replace('```html', '').replace('```', '').strip()
+                  with open('index.html', 'w', encoding='utf-8') as f:
+                      f.write(clean_html)
+                  print(f"✅ Tuyệt vời! Gemini Pro đã hoàn thành bản thiết kế.")
+              else:
+                  print("❌ Lỗi: Model không trả về nội dung.")
+                  sys.exit(1)
 
-          if not run_task():
-              print("❌ Hệ thống đã thử mọi cách nhưng Google từ chối do hết hạn mức miễn phí.")
+          except Exception as e:
+              if "429" in str(e):
+                  print("⚠️ Hạn mức API đang tạm nghẽn. Hãy đợi 1 phút rồi nhấn 'Run workflow' lại nhé!")
+              else:
+                  print(f"❌ System Error: {e}")
               sys.exit(1)
           EOF
 
@@ -78,8 +74,8 @@ jobs:
           git config --global user.email "bot@google.ai"
           git add index.html
           if git diff --staged --quiet; then
-            echo "No changes detected."
+            echo "No changes."
           else
-            git commit -m "AI Auto-update [Resilient Mode]"
+            git commit -m "AI Pro Auto-update"
             git push
           fi
